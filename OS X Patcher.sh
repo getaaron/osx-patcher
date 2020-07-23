@@ -210,7 +210,7 @@ Create_Installer()
 	Output_Off asr restore -source "$installer_images_path"/BaseSystem.dmg -target "$installer_volume_path" -noprompt -noverify -erase
 	echo -e $(date "+%b %m %H:%M:%S") ${move_up}${erase_line}${text_success}"+ Restored installer disk image."${erase_style}
 
-	echo -e $(date "+%b %m %H:%M:%S") ${text_progress}"> Renaming installer volume."${erase_style}
+	echo -e $(date "+%b %m %H:%M:%S") ${text_progress}"> Renaming installer volume. (5–10 min)"${erase_style}
 	Output_Off diskutil rename /Volumes/*Base\ System "$installer_volume_name"
 	bless --folder "$installer_volume_path"/System/Library/CoreServices --label "$installer_volume_name"
 	echo -e $(date "+%b %m %H:%M:%S") ${move_up}${erase_line}${text_success}"+ Renamed installer volume."${erase_style}
@@ -220,7 +220,7 @@ Create_Installer()
 	cp -R /tmp/InstallESD/Packages "$installer_volume_path"/System/Installation/
 	echo -e $(date "+%b %m %H:%M:%S") ${move_up}${erase_line}${text_success}"+ Copied installer packages."${erase_style}
 
-	echo -e $(date "+%b %m %H:%M:%S") ${text_progress}"> Copying installer disk images."${erase_style}
+	echo -e $(date "+%b %m %H:%M:%S") ${text_progress}"> Copying installer disk images. (25–35 min)"${erase_style}
 	cp "$installer_images_path"/BaseSystem.dmg "$installer_volume_path"/
 	cp "$installer_images_path"/BaseSystem.chunklist "$installer_volume_path"/
 	
@@ -245,7 +245,7 @@ Create_Installer()
 	fi
 
 	if [[ $installer_version_short == "10.1"[0-1] ]]; then
-		echo -e $(date "+%b %m %H:%M:%S") ${text_progress}"> Copying installer kernel."${erase_style}
+		echo -e $(date "+%b %m %H:%M:%S") ${text_progress}"> Copying installer kernel. (10–15 min)"${erase_style}
 		mkdir -p "$installer_volume_path"/System/Library/Kernels
 		cp "$resources_path"/Kernels/"$installer_version_short"/kernel "$installer_volume_path"/System/Library/Kernels
 		echo -e $(date "+%b %m %H:%M:%S") ${move_up}${erase_line}${text_success}"+ Copied installer kernel."${erase_style}
@@ -326,7 +326,7 @@ Patch_Installer()
 		echo -e $(date "+%b %m %H:%M:%S") ${move_up}${erase_line}${text_success}"+ Patched kernel cache."${erase_style}
 	fi
 
-	echo -e $(date "+%b %m %H:%M:%S") ${text_progress}"> Copying patcher utilities."${erase_style}
+	echo -e $(date "+%b %m %H:%M:%S") ${text_progress}"> Copying patcher utilities. (10–15 min)"${erase_style}
 	cp -R "$resources_path"/patch "$installer_volume_path"/
 	cp "$resources_path"/dm "$installer_volume_path"/usr/bin
 	cp "$resources_path"/patch.sh "$installer_volume_path"/usr/bin/patch
